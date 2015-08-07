@@ -1,0 +1,22 @@
+{
+    "name": "ocr-tool",
+    "title": "OCR tool",
+    "id": "ocr-tool@brett.zamir",
+    "version": "0.1.0",
+    "license": "MIT",
+    "author": "Brett Zamir",
+    "contributors": [],
+    "main": "index",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/brettz9/ocr-tool.git"
+    },
+    "dependencies": {
+        "node-tesseract": "0.x"
+    },
+    "bugs": "https://github.com/brettz9/ocr-tool/issues",
+    "description": "OCR",
+    "keywords": [
+        "ocr"
+    ]
+}
