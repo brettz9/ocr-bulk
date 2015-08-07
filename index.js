@@ -34,7 +34,7 @@ readOCR(1, 376, function (text, i) {
         console.log('Finishing ' + i);
         str += '\n\n{{page|' + i + '}}\n\n' + text;
     }, function () {
-    fs.writeFile(__dirname + 'ocr.txt', str, function (err) {
+    fs.writeFile(__dirname + '/ocr.txt', str, function (err) {
         if (err) {
             throw err;
         }
