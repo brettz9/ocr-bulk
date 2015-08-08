@@ -12,8 +12,7 @@
         "url": "https://github.com/brettz9/ocr-tool.git"
     },
     "dependencies": {
-        "node-tesseract": "0.x",
-        "imagemagick-native": "1.x"
+        "node-tesseract": "0.x"
     },
     "bugs": "https://github.com/brettz9/ocr-tool/issues",
     "description": "OCR",
