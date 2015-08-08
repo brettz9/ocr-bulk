@@ -1,7 +1,7 @@
 {
-    "name": "ocr-tool",
-    "title": "OCR tool",
-    "id": "ocr-tool@brett.zamir",
+    "name": "ocr-bulk",
+    "title": "OCR bulk",
+    "id": "ocr-bulk@brett.zamir",
     "version": "0.1.0",
     "license": "MIT",
     "author": "Brett Zamir",
@@ -9,12 +9,12 @@
     "main": "index",
     "repository": {
         "type": "git",
-        "url": "https://github.com/brettz9/ocr-tool.git"
+        "url": "https://github.com/brettz9/ocr-bulk.git"
     },
     "dependencies": {
         "node-tesseract": "0.x"
     },
-    "bugs": "https://github.com/brettz9/ocr-tool/issues",
+    "bugs": "https://github.com/brettz9/ocr-bulk/issues",
     "description": "OCR",
     "keywords": [
         "ocr"
