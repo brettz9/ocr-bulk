@@ -38,17 +38,18 @@ var readOCR = exports.readOCR = function readOCR (cfg) {
 };
 
 exports.writeFile = function writeFile (cfg) {
-    var str = '';
     readOCR({
+        cfg: cfg,
         start: cfg.start,
         end: cfg.end,
+        str: '',
         getImagePath: cfg.getImagePath,
         processor: function (text, i) {
-            str += cfg.concatenater(text, i);
+            this.str += cfg.concatenater(text, i);
         },
         readErrback: cfg.readErrback,
         done: function () {
-            fs.writeFile(cfg.outputPath, str, function (err) {
+            fs.writeFile(cfg.outputPath, this.str, function (err) {
                 if (err) {
                     if (cfg.writeErrback) {
                         cfg.writeErrback(err);
