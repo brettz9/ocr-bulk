@@ -18,7 +18,7 @@ var readOCR = exports.readOCR = function readOCR (cfg) {
     t.process(cfg.getImagePath(i || 1), function (err, text) {
         function resume () {
             if (i < cfg.end) {
-                readOCR({start: ++i, end: cfg.end, getImagePath: cfg.getImagePath.bind(cfg), processor: cfg.processor.bind(cfg), readErrback: cfg.readErrback.bind(cfg), done: cfg.done.bind(cfg)});
+                readOCR({start: ++i, end: cfg.end, getImagePath: cfg.getImagePath.bind(cfg), processor: cfg.processor.bind(cfg), readErrback: cfg.readErrback && cfg.readErrback.bind(cfg), done: cfg.done && cfg.done.bind(cfg)});
                 return;
             }
             if (cfg.done) {
