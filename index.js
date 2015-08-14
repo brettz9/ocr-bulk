@@ -16,9 +16,19 @@ exports.pad = function pad (val, len, chr) {
 var readOCR = exports.readOCR = function readOCR (cfg) {
     var i = cfg.start;
     t.process(cfg.getImagePath(i || 1), function (err, text) {
+        function resume () {
+            if (i < cfg.end) {
+                readOCR({start: ++i, end: cfg.end, getImagePath: cfg.getImagePath.bind(cfg), processor: cfg.processor.bind(cfg), readErrback: cfg.readErrback.bind(cfg), done: cfg.done.bind(cfg)});
+                return;
+            }
+            if (cfg.done) {
+                cfg.done();
+            }
+        }
         if (err) {
             if (cfg.readErrback) {
-                cfg.readErrback(err, i);
+                cfg.readErrback(err, i, resume);
+                return;
             }
             else {
                 console.error(err);
@@ -27,13 +37,7 @@ var readOCR = exports.readOCR = function readOCR (cfg) {
         else {
             cfg.processor(text, i);
         }
-        if (i < cfg.end) {
-            readOCR({start: ++i, end: cfg.end, getImagePath: cfg.getImagePath, processor: cfg.processor, readErrback: cfg.readErrback, done: cfg.done});
-            return;
-        }
-        if (cfg.done) {
-            cfg.done();
-        }
+        resume();
     });
 };
 
@@ -45,22 +49,22 @@ exports.writeFile = function writeFile (cfg) {
         str: '',
         getImagePath: cfg.getImagePath,
         processor: function (text, i) {
-            this.str += cfg.concatenater(text, i);
+            this.str += this.cfg.concatenater(text, i);
         },
         readErrback: cfg.readErrback,
         done: function () {
-            fs.writeFile(cfg.outputPath, this.str, function (err) {
+            fs.writeFile(this.cfg.outputPath, this.str, function (err) {
                 if (err) {
-                    if (cfg.writeErrback) {
-                        cfg.writeErrback(err);
+                    if (this.cfg.writeErrback) {
+                        this.cfg.writeErrback(err);
                         return;
                     }
                     throw err;
                 }
-                if (cfg.done) {
-                    cfg.done();
+                if (this.cfg.done) {
+                    this.cfg.done();
                 }
-            });
+            }.bind(this));
         }
     });
 };
