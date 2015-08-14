@@ -18,20 +18,21 @@ var readOCR = exports.readOCR = function readOCR (cfg) {
     t.process(cfg.getImagePath(i || 1), function (err, text) {
         if (err) {
             if (cfg.readErrback) {
-                cfg.readErrback(err);
-                return;
+                cfg.readErrback(err, i);
             }
-            console.error(err);
+            else {
+                console.error(err);
+            }
         }
         else {
             cfg.processor(text, i);
-            if (i < cfg.end) {
-                readOCR({start: ++i, end: cfg.end, getImagePath: cfg.getImagePath, processor: cfg.processor, readErrback: cfg.readErrback, done: cfg.done});
-                return;
-            }
-            if (cfg.done) {
-                cfg.done();
-            }
+        }
+        if (i < cfg.end) {
+            readOCR({start: ++i, end: cfg.end, getImagePath: cfg.getImagePath, processor: cfg.processor, readErrback: cfg.readErrback, done: cfg.done});
+            return;
+        }
+        if (cfg.done) {
+            cfg.done();
         }
     });
 };
