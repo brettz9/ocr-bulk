@@ -1,18 +1,20 @@
 (function () {'use strict';
 
-var volume = process.argv[2];
-var offset = process.argv[3];
 var skip = false;
+var volume = process.argv[2];
+var end = process.argv[3];
+var offset = process.argv[4];
 
 var ot = require('./index'); // require('ocr-bulk');
 ot.writeFile({
     start: 1,
-    end: 5, // ; prefatory + 1-377
+    end: end,
     outputPath: __dirname + '/ocr-' + volume + '.txt',
     readErrback: function (err, i, resume) {
         ot.readOCR({start: i, end: i, getImagePath: function (idx) {
-            return this.getImagePath(idx).replace(/\.jpg$/, '.png');
-        }.bind(this), processor: this.processor.bind(this), readErrback: function () {
+            return this.getImagePath(idx);
+        }.bind(this), processor: this.processor.bind(this), readErrback: function (err) {
+            console.log(err);
             console.log('finally failed');
         }, done: function () {
             resume();
