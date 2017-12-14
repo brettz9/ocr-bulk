@@ -1,5 +1,7 @@
 # ocr-bulk
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/brettz9/ocr-bulk.svg)](https://greenkeeper.io/)
+
 For performing OCR recognition on images.
 
 # Installation
