@@ -41,5 +41,5 @@ ot.writeFile({
 
 1. Add methods for zipping results and make a server with web app
 1. Add [node-imagemagick](https://github.com/yourdeveloper/node-imagemagick) or [node-imagemagick-native](https://github.com/mash/node-imagemagick-native) dependency for [converting PDFs](http://kiirani.com/2013/03/22/tesseract-pdf.html).
-1. Note: Could use http://manuels.github.io/unix-toolbox.js/ for client-side conversion, esp. if Tesseract could ever be
-[converted to asm.js](https://github.com/tesseract-ocr/tesseract/issues/75).
+1. Could use [tesseract.js](https://github.com/naptha/tesseract.js) for client-side conversion
+1. For imagemagick, could use <http://manuels.github.io/unix-toolbox.js/>.

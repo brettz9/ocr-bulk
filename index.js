@@ -1,24 +1,30 @@
-/*jslint node:true, vars:true, todo:true*/
-
 (function () {'use strict';
 
-var fs = require('fs');
-var t = require('node-tesseract');
+const fs = require('fs');
+const t = require('node-tesseract');
 
 exports.pad = function pad (val, len, chr) {
-    var arrLen = (len + 1 - val.toString().length);
+    let arrLen = (len + 1 - val.toString().length);
     if (arrLen <= 1) {
         arrLen = 1;
     }
     return new Array(arrLen).join(typeof chr === 'string' ? chr : '0') + val; // Todo: refactor with String.prototype.repeat
 };
 
-var readOCR = exports.readOCR = function readOCR (cfg) {
-    var i = cfg.start;
+const readOCR = exports.readOCR = function readOCR (cfg) {
+    let i = cfg.start;
     t.process(cfg.getImagePath(i || 1), function (err, text) {
         function resume () {
             if (i < cfg.end) {
-                readOCR({start: ++i, end: cfg.end, getImagePath: cfg.getImagePath.bind(cfg), processor: cfg.processor.bind(cfg), readErrback: cfg.readErrback && cfg.readErrback.bind(cfg), done: cfg.done && cfg.done.bind(cfg)});
+                readOCR({
+                    start: ++i,
+                    end: cfg.end,
+                    getImagePath:
+                    cfg.getImagePath.bind(cfg),
+                    processor: cfg.processor.bind(cfg),
+                    readErrback: cfg.readErrback && cfg.readErrback.bind(cfg),
+                    done: cfg.done && cfg.done.bind(cfg)
+                });
                 return;
             }
             if (cfg.done) {
@@ -43,7 +49,7 @@ var readOCR = exports.readOCR = function readOCR (cfg) {
 
 exports.writeFile = function writeFile (cfg) {
     readOCR({
-        cfg: cfg,
+        cfg,
         start: cfg.start,
         end: cfg.end,
         str: '',
