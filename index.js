@@ -13,7 +13,7 @@ exports.pad = function pad (val, len, chr) {
 
 const readOCR = exports.readOCR = function readOCR (cfg) {
     let i = cfg.start;
-    t.process(cfg.getImagePath(i || 1), function (err, text) {
+    t.process(cfg.getImagePath(i || 1), cfg.tesseractOptions || {}, function (err, text) {
         function resume () {
             if (i < cfg.end) {
                 readOCR({
@@ -52,6 +52,7 @@ exports.writeFile = function writeFile (cfg) {
         cfg,
         start: cfg.start,
         end: cfg.end,
+        tesseractOptions: cfg.tesseractOptions,
         str: '',
         getImagePath: cfg.getImagePath,
         processor: function (text, i) {

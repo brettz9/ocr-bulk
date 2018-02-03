@@ -2,7 +2,7 @@
     "name": "ocr-bulk",
     "title": "OCR bulk",
     "id": "ocr-bulk@brett.zamir",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "license": "MIT",
     "author": "Brett Zamir",
     "contributors": [],
@@ -12,7 +12,7 @@
         "url": "https://github.com/brettz9/ocr-bulk.git"
     },
     "dependencies": {
-        "node-tesseract": "0.x"
+        "node-tesseract": "^0.2.7"
     },
     "bugs": "https://github.com/brettz9/ocr-bulk/issues",
     "description": "OCR",
