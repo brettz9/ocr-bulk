@@ -1,14 +1,14 @@
 (function () {'use strict';
 
-var skip = false;
-var volume = process.argv[2];
-var end = process.argv[3];
-var offset = process.argv[4];
+const skip = false;
+const volume = process.argv[2];
+const end = process.argv[3];
+const offset = process.argv[4];
 
 var ot = require('./index'); // require('ocr-bulk');
 ot.writeFile({
     start: 1,
-    end: end,
+    end,
     outputPath: __dirname + '/ocr-' + volume + '.txt',
     readErrback: function (err, i, resume) {
         ot.readOCR({start: i, end: i, getImagePath: function (idx) {

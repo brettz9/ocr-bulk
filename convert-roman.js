@@ -1,11 +1,11 @@
 (function () {'use strict';
 
-var volume = process.argv[2];
-var offset = process.argv[3];
-var skip = false;
+const volume = process.argv[2];
+const offset = process.argv[3];
+const skip = false;
 
-var toRoman = require('roman-numerals').toRoman;
-var ot = require('./index'); // require('ocr-bulk');
+const toRoman = require('roman-numerals').toRoman;
+const ot = require('./index'); // require('ocr-bulk');
 ot.writeFile({
     start: 1,
     end: 15,
