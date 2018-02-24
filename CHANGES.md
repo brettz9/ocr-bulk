@@ -1,3 +1,6 @@
+#0.3.1
+- npm: Update `package-lock.json`
+
 # 0.3.0
 - Enhancement: Add `gm` for PDF processing and use in Persian
     example (which also uses arguments)
