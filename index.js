@@ -4,75 +4,82 @@ const fs = require('fs');
 const t = require('node-tesseract');
 
 exports.pad = function pad (val, len, chr) {
-    let arrLen = (len + 1 - val.toString().length);
+    val = val.toString();
+    if (val.padStart) { // Todo: Just use this block when supported
+        return val.padStart(len, typeof chr === 'string' ? chr : '0');
+    }
+    let arrLen = (len + 1 - val.length);
     if (arrLen <= 1) {
         arrLen = 1;
     }
-    return new Array(arrLen).join(typeof chr === 'string' ? chr : '0') + val; // Todo: refactor with String.prototype.repeat
+    return new Array(arrLen).join(typeof chr === 'string' ? chr : '0') + val;
 };
 
 const readOCR = exports.readOCR = function readOCR (cfg) {
     let i = cfg.start;
-    t.process(cfg.getImagePath(i || 1), cfg.tesseractOptions || {}, function (err, text) {
-        function resume () {
-            if (i < cfg.end) {
-                readOCR({
-                    start: ++i,
-                    end: cfg.end,
-                    getImagePath:
-                    cfg.getImagePath.bind(cfg),
-                    processor: cfg.processor.bind(cfg),
-                    readErrback: cfg.readErrback && cfg.readErrback.bind(cfg),
-                    done: cfg.done && cfg.done.bind(cfg)
-                });
+    return new Promise((resolve, reject) => {
+        t.process(cfg.getImagePath(i || 1), cfg.tesseractOptions || {}, function (err, text) {
+            function resume () {
+                if (i < cfg.end) {
+                    readOCR({
+                        start: ++i,
+                        end: cfg.end,
+                        getImagePath: cfg.getImagePath.bind(cfg),
+                        processor: cfg.processor.bind(cfg),
+                        readErrback: cfg.readErrback && cfg.readErrback.bind(cfg),
+                        done: cfg.done && cfg.done.bind(cfg)
+                    }).then(() => {
+                        resolve(cfg);
+                    });
+                    return;
+                }
+                if (cfg.done) {
+                    cfg.done();
+                }
+                resolve(cfg);
+            }
+            if (err) {
+                if (cfg.readErrback) {
+                    cfg.readErrback(err, i, resume, resolve, reject);
+                } else {
+                    reject(err);
+                }
                 return;
             }
-            if (cfg.done) {
-                cfg.done();
-            }
-        }
-        if (err) {
-            if (cfg.readErrback) {
-                cfg.readErrback(err, i, resume);
-                return;
-            }
-            else {
-                console.error(err);
-            }
-        }
-        else {
             cfg.processor(text, i);
-        }
-        resume();
+            resume();
+        });
     });
 };
 
 exports.writeFile = function writeFile (cfg) {
-    readOCR({
-        cfg,
+    return readOCR({
         start: cfg.start,
         end: cfg.end,
         tesseractOptions: cfg.tesseractOptions,
         str: '',
         getImagePath: cfg.getImagePath,
-        processor: function (text, i) {
-            this.str += this.cfg.concatenater(text, i);
+        processor (text, i) {
+            this.str += cfg.concatenater(text, i);
         },
-        readErrback: cfg.readErrback,
-        done: function () {
-            fs.writeFile(this.cfg.outputPath, this.str, function (err) {
+        readErrback: cfg.readErrback
+    }).then(function ({str}) {
+        return new Promise((resolve, reject) => {
+            fs.writeFile(cfg.outputPath, str, function (err) {
                 if (err) {
-                    if (this.cfg.writeErrback) {
-                        this.cfg.writeErrback(err);
+                    if (cfg.writeErrback) {
+                        cfg.writeErrback(err);
                         return;
                     }
-                    throw err;
+                    reject(err);
+                    return;
                 }
-                if (this.cfg.done) {
-                    this.cfg.done();
+                if (cfg.done) {
+                    cfg.done();
                 }
-            }.bind(this));
-        }
+                resolve();
+            });
+        });
     });
 };
 

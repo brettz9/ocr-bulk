@@ -1,3 +1,11 @@
+# 0.3.0
+- Enhancement: Add `gm` for PDF processing and use in Persian
+    example (which also uses arguments)
+- Enhancement: Return Promises from `readOCR` and `writeFile`
+- Refactoring: ES6 in examples
+- Github: Remove Greenkeeper
+- Build: Add yarn.lock
+
 # 0.2.0
 - Enhancement: Support passing in Tesseract options (e.g., to indicate a
     language)
