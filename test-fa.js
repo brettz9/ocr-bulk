@@ -37,11 +37,12 @@ function convertPDFFrames () {
                 );
                 */
                 const readStream = fs.createReadStream(pathResolve(__dirname, pdf));
-                const writeStream = im(readStream).selectFrame(frame).stream('jpg').pipe(
-                    fs.createWriteStream(
-                        pathResolve(__dirname, `${targetBase}-${frame + 1}.jpg`)
-                    )
-                );
+                const writeStream = im(readStream).selectFrame(frame).
+                    density(density).quality(quality).stream('jpg').pipe(
+                        fs.createWriteStream(
+                            pathResolve(__dirname, `${targetBase}-${frame + 1}.jpg`)
+                        )
+                    );
                 readStream.on('error', errorHandler);
                 writeStream.on('error', errorHandler);
                 writeStream.on('finish', () => {
