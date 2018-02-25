@@ -12,8 +12,8 @@ if (startFrame > endFrame) {
     throw new Error('Start frame must not be greater than end frame argument');
 }
 
-const density = 300;
-const quality = 75;
+const density = 400;
+const quality = 100;
 
 function convertPDFFrames () {
     const pdfRetrievals = [];
