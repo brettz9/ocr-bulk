@@ -16,6 +16,7 @@ if (startFrame > endFrame) {
 
 const density = 400;
 const quality = 100;
+const cwd = process.cwd();
 
 /**
  * @returns {Promise<void>}
@@ -37,8 +38,8 @@ function convertPDFFrames () {
         }
         /*
         // Working
-        im(pathResolve(__dirname, pdf)).selectFrame(frame).write(
-          pathResolve(__dirname, `${targetBase}-${frame + 1}.jpg`),
+        im(pathResolve(cwd, pdf)).selectFrame(frame).write(
+          pathResolve(cwd, `${targetBase}-${frame + 1}.jpg`),
           (err) => {
             if (err) errorHandler(err);
             else {
@@ -48,11 +49,12 @@ function convertPDFFrames () {
           }
         );
         */
-        const readStream = fs.createReadStream(pathResolve(__dirname, pdf));
+
+        const readStream = fs.createReadStream(pathResolve(cwd, pdf));
         const writeStream = im(readStream).selectFrame(frame)
           .density(density).quality(quality).stream('jpg').pipe(
             fs.createWriteStream(
-              pathResolve(__dirname, `${targetBase}-${frame + 1}.jpg`)
+              pathResolve(cwd, `${targetBase}-${frame + 1}.jpg`)
             )
           );
         readStream.on('error', errorHandler);
@@ -77,9 +79,9 @@ try {
     tesseractOptions: {
       l: 'fas' // Farsi
     },
-    outputPath: pathResolve(__dirname, 'ocr-fa.txt'),
+    outputPath: pathResolve(cwd, 'ocr-fa.txt'),
     getImagePath (frame) {
-      return pathResolve(__dirname, `${targetBase}-${frame + 1}.jpg`);
+      return pathResolve(cwd, `${targetBase}-${frame + 1}.jpg`);
     },
     concatenater (text, i) {
       // eslint-disable-next-line no-console
