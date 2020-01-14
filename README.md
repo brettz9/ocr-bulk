@@ -1,11 +1,11 @@
 # ocr-bulk
 
-For performing OCR recognition on images.
+Perform OCR recognition on multiple images.
 
 # Installation
 
 1. Install [node-tesseract](https://github.com/tesseract-ocr/tesseract) (e.g., the [Windows installer](https://code.google.com/p/tesseract-ocr/downloads/detail?name=tesseract-ocr-setup-3.02.02.exe&can=2&q=)).
-1. `npm install ocr-bulk`
+1. `npm i -D ocr-bulk` (for development use) or `npm i -P ocr-bulk` (for production use)
 
 For PDF conversion support:
 
