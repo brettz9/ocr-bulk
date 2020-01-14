@@ -1,23 +1,50 @@
 {
-    "name": "ocr-bulk",
-    "title": "OCR bulk",
-    "id": "ocr-bulk@brett.zamir",
-    "version": "0.3.1",
-    "license": "MIT",
-    "author": "Brett Zamir",
-    "contributors": [],
-    "main": "index",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/brettz9/ocr-bulk.git"
-    },
-    "dependencies": {
-        "gm": "^1.23.1",
-        "node-tesseract": "^0.2.7"
-    },
-    "bugs": "https://github.com/brettz9/ocr-bulk/issues",
-    "description": "OCR",
-    "keywords": [
-        "ocr"
-    ]
+  "name": "ocr-bulk",
+  "version": "0.4.0",
+  "license": "MIT",
+  "author": "Brett Zamir",
+  "contributors": [],
+  "main": "index",
+  "scripts": {
+    "eslint": "eslint --ext=js,md,html ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brettz9/ocr-bulk.git"
+  },
+  "homepage": "https://github.com/brettz9/ocr-bulk",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "bugs": "https://github.com/brettz9/ocr-bulk/issues",
+  "description": "Perform OCR recognition on multiple images",
+  "keywords": [
+    "ocr"
+  ],
+  "dependencies": {
+    "gm": "^1.23.1",
+    "node-tesseract": "^0.2.7",
+    "roman-numerals": "^0.3.2"
+  },
+  "devDependencies": {
+    "@mysticatea/eslint-plugin": "^13.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-ash-nazg": "16.5.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-array-func": "^3.1.3",
+    "eslint-plugin-compat": "^3.3.0",
+    "eslint-plugin-eslint-comments": "^3.1.2",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsdoc": "^20.3.0",
+    "eslint-plugin-markdown": "^1.0.1",
+    "eslint-plugin-no-unsanitized": "^3.0.2",
+    "eslint-plugin-no-use-extend-native": "^0.4.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-unicorn": "^15.0.1",
+    "typescript": "^3.7.4"
+  }
 }

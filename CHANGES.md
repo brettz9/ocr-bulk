@@ -1,11 +1,13 @@
 # CHANGES for ocr-bulk
 
-## ?
+## 0.4.0
 
+- Fix: Include `roman-numerals` dependency
 - Linting (Markdown): Remove `.remarkrc`
 - Docs: Clean-up Markdown
 - Maintenance: Add `.editorconfig`
 - npm: Add ignore file
+- npm: Add eslint script
 
 ## 0.3.1
 
