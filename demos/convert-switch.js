@@ -4,7 +4,7 @@ const skip = false;
 const [, , volume, end, offset] = process.argv[2];
 
 const {join} = require('path');
-const ot = require('./index'); // require('ocr-bulk');
+const ot = require('../index'); // require('ocr-bulk');
 
 ot.writeFile({
   start: 1,

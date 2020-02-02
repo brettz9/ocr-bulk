@@ -1,5 +1,13 @@
 # CHANGES for ocr-bulk
 
+## 0.5.0
+
+- Update: Point to `node-tesseract` which can work with Tesseract 5 alpha;
+  require Node 8.3.0+
+- Docs: Fix reference to tesseract
+- Refactoring: Move demo files to own directory
+- npm: Update devDeps; add `package-lock.json` in place of yarn
+
 ## 0.4.0
 
 - Fix: Include `roman-numerals` dependency

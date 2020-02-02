@@ -7,7 +7,7 @@ adapting of source.**
 
 ## Installation
 
-1. Install [node-tesseract](https://github.com/tesseract-ocr/tesseract) (e.g., the [Windows installer](https://code.google.com/p/tesseract-ocr/downloads/detail?name=tesseract-ocr-setup-3.02.02.exe&can=2&q=)).
+1. Install [tesseract](https://github.com/tesseract-ocr/tesseract) (e.g., the [Windows installer](https://code.google.com/p/tesseract-ocr/downloads/detail?name=tesseract-ocr-setup-3.02.02.exe&can=2&q=)).
 1. `npm i -D ocr-bulk` (for development use) or `npm i -P ocr-bulk` (for production use)
 
 For PDF conversion support:
@@ -51,7 +51,8 @@ console.log('Saved!');
 
 ## Todos
 
-1. Need to make as binary!!!!
+1. Make as binary with flag to pass in (JavaScript) config file
 1. Add methods for zipping results and make a server with web app
-1. Could use [tesseract.js](https://github.com/naptha/tesseract.js) for client-side conversion
+1. Could use [tesseract.js](https://github.com/naptha/tesseract.js) for
+    client-side conversion
 1. For imagemagick, could use <http://manuels.github.io/unix-toolbox.js/>.

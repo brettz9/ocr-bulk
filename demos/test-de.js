@@ -1,7 +1,7 @@
 'use strict';
 
 const {join} = require('path');
-const ot = require('./index'); // require('ocr-bulk');
+const ot = require('../index'); // require('ocr-bulk');
 
 (async () => {
 await ot.writeFile({

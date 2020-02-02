@@ -5,59 +5,51 @@ const t = require('node-tesseract');
 
 exports.pad = function pad (val, len, chr) {
   val = val.toString();
-  if (val.padStart) { // Todo: Just use this block when supported
-    return val.padStart(len, typeof chr === 'string' ? chr : '0');
-  }
-  let arrLen = (len + 1 - val.length);
-  if (arrLen <= 1) {
-    arrLen = 1;
-  }
-  return new Array(arrLen).join(typeof chr === 'string' ? chr : '0') + val;
+  return val.padStart(len, typeof chr === 'string' ? chr : '0');
 };
 
 const readOCR = exports.readOCR = function readOCR (cfg) {
   let i = cfg.start;
-  // Todo: Ask for Promise-based API
-  // eslint-disable-next-line promise/avoid-new
-  return new Promise((resolve, reject) => {
-    t.process(
-      cfg.getImagePath(i || 1),
-      cfg.tesseractOptions || {},
-      // eslint-disable-next-line promise/prefer-await-to-callbacks
-      function (err, text) {
-        /**
-         * @returns {Promise<void>}
-         */
-        async function resume () {
-          if (i < cfg.end) {
-            await readOCR({
-              start: ++i,
-              end: cfg.end,
-              getImagePath: cfg.getImagePath.bind(cfg),
-              processor: cfg.processor.bind(cfg),
-              readErrback: cfg.readErrback && cfg.readErrback.bind(cfg),
-              done: cfg.done && cfg.done.bind(cfg)
-            });
-            resolve(cfg);
-            return;
-          }
-          if (cfg.done) {
-            cfg.done();
-          }
-          resolve(cfg);
-        }
-        if (err) {
-          if (cfg.readErrback) {
-            cfg.readErrback(err, i, resume, resolve, reject);
-          } else {
-            reject(err);
-          }
-          return;
-        }
-        cfg.processor(text, i);
-        resume();
+  // eslint-disable-next-line promise/avoid-new, no-async-promise-executor
+  return new Promise(async (resolve, reject) => {
+    let text;
+    try {
+      text = await t.process(
+        cfg.getImagePath(i || 1),
+        cfg.tesseractOptions || {}
+      );
+    } catch (err) {
+      if (cfg.readErrback) {
+        cfg.readErrback(err, i, resume, resolve, reject);
+      } else {
+        reject(err);
       }
-    );
+      return;
+    }
+    // Todo: Give option to resolve Promises in parallel
+    /**
+     * @returns {Promise<void>}
+     */
+    async function resume () {
+      if (i < cfg.end) {
+        await readOCR({
+          start: ++i,
+          end: cfg.end,
+          getImagePath: cfg.getImagePath.bind(cfg),
+          processor: cfg.processor.bind(cfg),
+          readErrback: cfg.readErrback && cfg.readErrback.bind(cfg),
+          done: cfg.done && cfg.done.bind(cfg)
+        });
+        resolve(cfg);
+        return;
+      }
+      if (cfg.done) {
+        cfg.done();
+      }
+      resolve(cfg);
+    }
+    cfg.processor(text, i);
+    resume();
   });
 };
 

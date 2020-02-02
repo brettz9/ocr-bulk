@@ -3,7 +3,7 @@
 const fs = require('fs');
 const pathResolve = require('path').resolve;
 const im = require('gm').subClass({imageMagick: true});
-const ot = require('./index'); // require('ocr-bulk');
+const ot = require('../index'); // require('ocr-bulk');
 
 const pdf = process.argv[2];
 const targetBase = pdf.replace(/\.pdf$/u, '');
