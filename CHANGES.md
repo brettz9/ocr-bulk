@@ -1,5 +1,9 @@
 # CHANGES for ocr-bulk
 
+## 0.6.0
+
+- Update: Point to `node-tesseract` which supports PDF output
+
 ## 0.5.0
 
 - Update: Point to `node-tesseract` which can work with Tesseract 5 alpha;

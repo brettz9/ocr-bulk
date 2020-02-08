@@ -1,6 +1,6 @@
 {
   "name": "ocr-bulk",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "license": "MIT",
   "author": "Brett Zamir",
   "contributors": [],
@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "gm": "^1.23.1",
-    "node-tesseract": "git+https://github.com/brettz9/node-tesseract.git#tesseract-5",
+    "node-tesseract": "git+https://github.com/brettz9/node-tesseract.git#tesseract-5-with-pdf",
     "roman-numerals": "^0.3.2"
   },
   "devDependencies": {
