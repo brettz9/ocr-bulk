@@ -69,8 +69,10 @@ exports.writeFile = async function writeFile (cfg) {
   // todo[engine:node@>=12]: Use built-in fs promises
   // eslint-disable-next-line promise/avoid-new
   return new Promise((resolve, reject) => {
-    // eslint-disable-next-line promise/prefer-await-to-callbacks
-    fs.writeFile(cfg.outputPath, str, function (err) {
+    fs.writeFile(cfg.outputPath, str, {
+      encoding: 'encoding' in cfg ? cfg.encoding : 'utf8'
+      // eslint-disable-next-line promise/prefer-await-to-callbacks
+    }, function (err) {
       if (err) {
         if (cfg.writeErrback) {
           cfg.writeErrback(err);
