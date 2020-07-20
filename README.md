@@ -56,3 +56,4 @@ console.log('Saved!');
 1. Could use [tesseract.js](https://github.com/naptha/tesseract.js) for
     client-side conversion
 1. For imagemagick, could use <http://manuels.github.io/unix-toolbox.js/>.
+1. See also <https://github.com/zapolnoch/node-tesseract-ocr>.
