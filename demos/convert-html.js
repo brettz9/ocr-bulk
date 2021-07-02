@@ -9,18 +9,18 @@ const ot = require('../index'); // require('ocr-bulk');
 
 ot.writeFile({
   start: 1,
-  end: 256,
-  outputPath: join(__dirname, 'ocr-' + volume + '.txt'),
+  end: 14,
+  outputPath: join(__dirname, 'ocr-' + volume + '.html'),
   getImagePath (i) {
-    return 'C:\\Users\\Brett\\Documents\\images-' + volume + '\\image-' +
+    return '/Users/brett/Downloads/' +
       ot.pad(i, 4) + '.jpg';
   },
   concatenater (text, i) {
     // eslint-disable-next-line no-console
     console.log('Finishing ' + i);
-    return '\n\n{{page|' +
+    return '\n\n<a id="pg' +
       (skip ? '' : (i + (offset ? parseInt(offset) : 0))) +
-      '}}\n\n' + text;
+      '"></a>\n\n' + text;
   },
   done () {
     // eslint-disable-next-line no-console
