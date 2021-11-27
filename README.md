@@ -56,4 +56,7 @@ console.log('Saved!');
 1. Could use [tesseract.js](https://github.com/naptha/tesseract.js) for
     client-side conversion
 1. For imagemagick, could use <http://manuels.github.io/unix-toolbox.js/>.
+1. For PDFs without a dependency, use [pdf-lib](https://github.com/Hopding/pdf-lib) (TypeScript)
+    of [pdfcpu](https://dev.to/wcchoi/browser-side-pdf-processing-with-go-and-webassembly-13hn)
+    (Go -> WebAssembly)
 1. See also <https://github.com/zapolnoch/node-tesseract-ocr>.
