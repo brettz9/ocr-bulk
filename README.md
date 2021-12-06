@@ -57,3 +57,8 @@ console.log('Saved!');
     client-side conversion
 1. For imagemagick, could use <http://manuels.github.io/unix-toolbox.js/>.
 1. See also <https://github.com/zapolnoch/node-tesseract-ocr>.
+
+## Notes to self
+
+1. See <https://github.com/stafazzoli/FarsiOCR> re: Farsi and
+    <https://stackoverflow.com/a/64997047/271577> re: Tesseract on Silicon M1 Mac
